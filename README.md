@@ -34,7 +34,13 @@ BEBOP_URL="https://raw.githubusercontent.com/torch2424/bebop.sh/master/bebop.sh"
 
 ### Prefer local bebop, Falback to remote bebop (not reccomended)
 
-TBD
+This will use the local bebop installation, and then try to use the one remotely, in case the file is wrongly configured.
+
+```
+# Import of bebop.sh
+# https://github.com/torch2424/bebop.sh
+BEBOP_PATH="$HOME/.files_libs/bebop.sh"; BEBOP_URL="https://raw.githubusercontent.com/torch2424/bebop.sh/master/bebop.sh"; if [ -f "$BEBOP_PATH" ]; then source "$BEBOP_PATH"; elif curl -o /dev/null -sIf "$BEBOP_URL"; then curl -s "$BEBOP_URL" -o /tmp/bebop.sh; source /tmp/bebop.sh; else echo "Could not load bebop from $BEBOP_PATH or $BEBOP_URL. Please check your bebop path and internet connection. Halting execution of the script..."; exit 1; fi;
+```
 
 ### Prefer remote bebop, Fallback to local bebop (not reccomended)
 
@@ -45,5 +51,5 @@ This will attemp the download on runtime option, and if not availbe, will use a 
 ```
 # Import of bebop.sh
 # https://github.com/torch2424/bebop.sh
-BEBOP_PATH="$HOME/.files_libs/bebop.sh"; BEBOP_URL="https://raw.githubusercontent.com/torch2424/bebop.sh/master/bebop.sh"; if [ -f "$BEBOP_PATH" ]; then source "$BEBOP_PATH"; elif curl -o /dev/null -sIf "$BEBOP_URL"; then curl -s "$BEBOP_URL" -o /tmp/bebop.sh; source /tmp/bebop.sh; else echo "Could not load bebop from $BEBOP_PATH or $BEBOP_URL. Please check your bebop path and internet connection. Halting execution of the script..."; exit 1; fi;
+BEBOP_PATH="$HOME/.files_libs/bebop.sh"; BEBOP_URL="https://raw.githubusercontent.com/torch2424/bebop.sh/master/bebop.sh"; if curl -o /dev/null -sIf "$BEBOP_URL"; then curl -s "$BEBOP_URL" -o /tmp/bebop.sh; source /tmp/bebop.sh; elif [ -f "$BEBOP_PATH" ]; then source "$BEBOP_PATH"; else echo "Could not load bebop from $BEBOP_PATH or $BEBOP_URL. Please check your bebop path and internet connection. Halting execution of the script..."; exit 1; fi;
 ```
